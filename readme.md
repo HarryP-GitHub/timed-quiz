@@ -25,8 +25,8 @@ N/A
 
 ## Deployed Website link
 
-[Click for Website](https://harryp-github.github.io/timed-quiz/)
+[Click for Website](https://harryp-github.github.io/JavaScript-Fundamentals-Timed-Quiz/)
 
 ## Deployed Website image
 
-![Deployed Website Image](./assets/images/deployedquiz.png)
+![Deployed Website Image](./assets/images/deployedwebsite.png)
