@@ -144,7 +144,7 @@ function endQuiz() {
 submit.addEventListener("click", saveNewScore);
 
 function saveNewScore() {
-var name = initialsEl.value.trim();
+var name = initialsEl.value.toUpperCase().trim();
 
 if (name !== "") {
     var scoreboard = JSON.parse(window.localStorage.getItem('scores')) || [];
@@ -162,3 +162,5 @@ if (name !== "") {
 
 
 /*Section for Highscores page, store highscores and clear scores*/
+// doing it on a different script page, was getting error
+//Is there a way to fix?

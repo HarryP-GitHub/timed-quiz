@@ -67,6 +67,17 @@ button:hover {
   font-size: 120%;
 }
 
-.answers {
-  
+.score-page {
+    font-size: 150%;
+    margin: 200px auto auto auto;
+    max-width: 300px;
+    text-align: center;
+}
+
+
+.end-score {
+    font-size: 130%;
+    margin: 200px auto auto auto;
+    max-width: 300px;
+    text-align: center;
 }
