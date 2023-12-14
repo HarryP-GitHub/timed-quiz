@@ -25,7 +25,7 @@ N/A
 
 ## Deployed Website link
 
-https://harryp-github.github.io/timed-quiz/
+[Click for Website](https://harryp-github.github.io/timed-quiz/)
 
 ## Deployed Website image
 
