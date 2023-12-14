@@ -10,7 +10,7 @@ N/A
 
 ## Usage
 
-To use this page, either navigate to the highscores or alternatively start the quiz by pressing the start button. Answer the questions the best you can, keep in mind there is a timer counting down from 75 seconds. After you have answered all the questions or the timer has run out. Save your score by entering your initials and clicking submit. You can Go Back to the start or clear the highscores by clicking the relevant buttons. 
+To use this page, either navigate to the highscores or alternatively start the quiz by pressing the start button. Answer the questions the best you can, keep in mind there is a timer counting down from 75 seconds. Check the timer in the top right corner. If your answer is wrong, you will be deducted 15 seconds from the timer. After you have answered all the questions or the timer has run out, you will see your score which will be the time left. Save your score by entering your initials and clicking submit. You can Go Back to the start or clear the highscores by clicking the relevant buttons. 
 
 
 ## Credits
@@ -25,6 +25,8 @@ N/A
 
 ## Deployed Website link
 
+[Click for Website](https://harryp-github.github.io/timed-quiz/)
+
 ## Deployed Website image
 
-![Website Image](./assets/images/)
+![Deployed Website Image](./assets/images/deployedquiz.png)
