@@ -47,6 +47,11 @@ var startEl = document.getElementById('start');
 var questionsEl = document.getElementById('questions');
 var questionEl = document.getElementById('new-question');
 var answersEl = document.getElementById('answers');
+var endEl = document.getElementById('quiz-end');
+var scoreEl = document.getElementById('score');
+var initialsEl = document.getElementById('initials');
+var submit = document.getElementById('submit-btn')
+
 console.log('Script loaded');
 
 /* Start button / Quiz Starts / Timer starts count down / Question shown*/
@@ -59,7 +64,7 @@ function startQuiz() {
 
   timeCount.textContent = time;
 
-    console.log('Quiz');
+    console.log('Quiz started!');
   runQuestion();
 }
 
@@ -68,7 +73,7 @@ function startQuiz() {
 function runQuestion() {
 var newQuestion = questions[questionIndex];
 questionEl.textContent = newQuestion.question;
-console.log('loaded question');
+console.log('Question: ' + newQuestion.question);
 
 answersEl.textContent = "";
 
@@ -86,7 +91,7 @@ for (var i = 0; i < newQuestion.answers.length; i++) {
 //run function for answer if right/wrong etc and impacts time
 answersEl.addEventListener("click", runAnswer);
 function runAnswer(event) {
-console.log('answered');
+console.log('Your answer is...');
 var myAnswer = event.target;
 
 
@@ -97,15 +102,19 @@ if (myAnswer.value !== questions[questionIndex].correctAnswer) {
       if (time < 0) {
           time = 0;
     }
-    console.log('wrong answer');
+
+    console.log('The Wrong Answer!');
+
+    // fixed time left to match score, if last answer was wrong it wouldn't match
+    timeCount.textContent = time;
 }
 
 // will need to add in timer
 if (!myAnswer.matches('.answerStyle')) {
-    console.log('no answer');
+    console.log('No Answer?!');
  return;
 
-} else {
+} else if (myAnswer.value === questions[questionIndex].correctAnswer) {
   console.log('CORREEECCTT!!!');
 }
 
@@ -116,18 +125,39 @@ if (time <= 0 || questionIndex === questions.length) {
 } else {
     runQuestion();
 }
-console.log('testtest');
+// console.log('testtest');
 } 
 
 /*End Quiz if time runs out/answers all questions -> prompt screen*/
 
 function endQuiz() {
   clearInterval(theClock);
+
+  questionsEl.setAttribute('class', 'hidden');
+
+  endEl.removeAttribute('class', 'hidden');
+  scoreEl.textContent = time;
+
+  console.log('Your score is ' + time);
 }
 /* Save your high score and go to page or go back to main page, already have buttons*/
+submit.addEventListener("click", saveNewScore);
 
 function saveNewScore() {
+var name = initialsEl.value.trim();
 
+if (name !== "") {
+    var scoreboard = JSON.parse(window.localStorage.getItem('scores')) || [];
+
+    var newScore = {
+        score: time,
+        name: name,
+    };
+
+    scoreboard.push(newScore);
+    localStorage.setItem('scores', JSON.stringify(scoreboard));
+    location.href = 'highscores.html';
+}
 }
 
 
