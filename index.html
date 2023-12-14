@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Timed Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css"/>
@@ -12,14 +12,30 @@
     <div class="highscores">
         <a href="highscores.html">Highscores</a>
     </div>
-    <div class="clock">Time Left: <span id="time">75</span></div>
+      <div class="clock">Time Left: <span id="time">0</span></div>
+    <!-- Changing time to 0 because that should be default, as when the time runs out for final score-->
+    <!-- How do I make a new page for the questions without getting rid of time and highscores-->
+    <!-- Need to hide section below possibly so it can be one one page-->
+    <div class="main-page">
+      <div id="start" class="start">
+        <h1>JavaScript Fundamentals Quiz</h1> 
+          <p>
+              Try answering the following questions to test your JavaScript knowledge. 
+              You will have to answer the questions within the time limit.
+              Incorrect answers will penalize you by 15 seconds.
+          </p>
+          
+          <button id="start-btn">Start Quiz</button>
+      </div>
+    <!-- Need final score page from example-->
+    <!-- Need questions-->
+      <div id="questions" class="hidden">
+        <h2 id="new-question"></h2>
+          <div id="answers" class="answers"></div>
+      </div>
+    </div>
 
-    <h1>JavaScript Fundamentals Quiz</h1>
-    <p>Try answering the following questions to test your JavaScript knowledge. 
-        You will have to answer the questions within the time limit.
-        Incorrect answers will penalize you by 15 seconds.</p>
-    <button>Start Quiz</button>
-
+    <!-- Using JS/CSS I can set up questions and page to hide certain sections without needing new html pages-->
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
