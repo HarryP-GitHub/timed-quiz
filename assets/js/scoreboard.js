@@ -1,23 +1,24 @@
-function scoreboardPage() {
-    var scoreboard = JSON.parse(window.localStorage.getItem('scores')) || [];
-   scoreboard.sort(function (low, high) {
-   return high.score - low.score;
-   });
+const list = document.getElementById('highScoresList');
 
-   for (var i = 0; i < scoreboard.length; i+= 1) {
-    // how do I set a limit of 10 scores? If I get rid of scoreboard.length and replace with 10 it doesn't work
-    var list = document.createElement('li');
-    list.textContent = scoreboard[i].score + " - set by " + scoreboard[i].name;
-    var listScores = document.getElementById('scoreboard');
-    listScores.appendChild(list);
-    }
+function displayHighScores() {
+    // Gets highscores from localStorage or empty array if highscores is empty
+    const scores = JSON.parse(localStorage.getItem('highscores') || '[]');
+    // sets list empty before adding the ordered scores back in
+    list.innerHTML = '';
+    // Sorts the score from highest to lowest
+    scores.sort((a, b) => b.score - a.score).forEach(score => {
+        // creates list element for each score
+        let item = document.createElement('li');
+        // displays the intials: score
+        item.textContent = `${score.initials}: ${score.score}`;
+        list.appendChild(item);
+    });
 }
 
+document.getElementById('resetScores').addEventListener('click', function() {
+    localStorage.removeItem('highscores');
+    // Displaying the reset scoreboard
+    displayHighScores(); 
+});
 
-function clearScores() {
-  localStorage.removeItem('scores');
-  location.reload();
-}
-
-document.getElementById('clear-btn').addEventListener("click", clearScores);
-scoreboardPage();
+displayHighScores();

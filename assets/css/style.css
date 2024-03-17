@@ -3,81 +3,66 @@
     --theme2: #0d44bb;
     --highlight: #5dd7f3;
 }
-/*Using same theme as previous project to try have some style across my future portfolio*/
 
 body {
     background-color: var(--theme);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 100%;
     color: white;
+    margin: 0;
+    padding: 0;
     text-align: center;
 }
 
-a {
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.nav-link {
+    color: #fff;
     text-decoration: none;
-    display: inline-block;
-    color: white;
-    
-}
-
-a:hover {
-    color: var(--highlight);
-}
-
-button {
-    display: inline-block;
-    background-color: var(--theme2);
-    color: white;
     padding: 10px;
-    
+    margin-bottom: 20px;
 }
 
-button:hover {
-    color: var(--highlight);
-    background-color: var(--theme);
+.time-display {
+    color: #fff;
+    margin-top: 20px;
 }
 
-.highscores {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    padding: 4px;
-}
-
-.clock {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    padding: 4px;
+.content {
+    margin-left: 220px;
+    padding: 20px;
+    text-align: center;
 }
 
 .hidden {
-  display: none;
+    display: none;
 }
 
-.answerStyle {
-  display: block;
-  cursor: pointer;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 15px;
-  border-radius: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  font-size: 120%;
+button {
+    background-color: var(--theme2);
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
 }
 
-.score-page {
-    font-size: 150%;
-    margin: 200px auto auto auto;
-    max-width: 300px;
-    text-align: center;
+button:hover {
+    background-color: var(--highlight);
 }
 
 
-.end-score {
-    font-size: 130%;
-    margin: 200px auto auto auto;
-    max-width: 300px;
-    text-align: center;
-}
+#highScoresList {
+    width: 20%; 
+    margin: auto;
+} 

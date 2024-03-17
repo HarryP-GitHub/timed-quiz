@@ -1,52 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JavaScript Fundamentals Quiz</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css"/>
-  </head>
+</head>
+<body>
+    <!-- Side Bar to navigate and display time -->
+    <aside class="sidebar">
+        <a href="highscores.html" class="nav-link">High Scores</a>
+        <p id="timerDisplay" class="time-display">Time: <span id="remainingTime">75</span>s</p>
+    </aside>
+    <main class="content">
+        <div id="intro" class="intro-section">
+            <h1>JavaScript Knowledge Quiz</h1> 
+            <p>Answer the following JavaScript-related questions within the time limit. Remember: incorrect answers will reduce your remaining time by 15 seconds!</p>
+            <!-- start button-->
+            <button id="beginQuiz">Start Quiz</button>
+        </div>
+        <!-- Questions generating in here-->
+        <div id="quiz" class="quiz-section hidden">
+            <h2 id="questionTitle"></h2>
+            <div id="choices" class="choices"></div>
+        </div>
 
-  <body>
-    <div class="highscores">
-        <a href="highscores.html">Highscores</a>
-    </div>
-      <div class="clock">Time Left: <span id="time">0</span></div>
-    <!-- Changing time to 0 because that should be default, as when the time runs out for final score-->
-    <!-- How do I make a new page for the questions without getting rid of time and highscores-->
-    <!-- Need to hide section below possibly so it can be one one page-->
-    <div class="main-page">
-      <div id="start" class="start">
-        <h1>JavaScript Fundamentals Quiz</h1> 
-          <p>
-              Try answering the following questions to test your JavaScript knowledge. 
-              You will have to answer the questions within the time limit.
-              Incorrect answers will penalize you by 15 seconds.
-          </p>
-          
-          <button id="start-btn">Start Quiz</button>
-      </div>
-    <!-- Need final score page from example-->
-    <!-- Need questions-->
-      <div id="questions" class="hidden">
-        <h2 id="new-question"></h2>
-          <div id="answers" class="answers"></div>
-      </div>
-    </div>
+        <!-- Submit score section -->
+        <!-- Upon the completion of the quiz, the user will provide initials and save their score to the scoreboard-->
+        <div id="quizCompletion" class="quiz-completion hidden">
+            <h2>Quiz Completed!</h2>
+            <p>Your final score is <span id="finalScore"></span>.</p>
+            <input type="text" id="userInitials" placeholder="Enter Initials" />
+            <button id="scoreSubmit">Submit</button>
+        </div>
 
-    <div id="quiz-end" class="hidden">
-     <div class="end-score">
-      <h2>Good Effort!</h2>
-        <p>Your score is <span id="score"></span>!</p>
-        <p>Enter your initials: <input type="text" id="initials"/>
-        <button id="submit-btn">Submit</button>
-        </p>
-      </div>
-    </div>
-
-    <!-- Using JS/CSS I can set up questions and page to hide certain sections without needing new html pages-->
+    </main>
     <script src="./assets/js/script.js"></script>
-  </body>
+</body>
 </html>
+
 
