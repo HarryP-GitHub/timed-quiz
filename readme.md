@@ -2,7 +2,7 @@
 
 ## Description
 
-This project was to make a timed quiz, on the fundamentals of JavaScript. Using what has been learnt, the  This quiz is on JavaScript  This project consists of quiz will start a countdown timer when the start button is clicked. After being prompted to answer different questions, the score will be displayed on the screen. If an answer is incorrect, 15 seconds will be deducted from the score. The quiz will end when the timer hits 0 or all the questions are answered. After the game is over you can save your score by registering it with your initials. You can then view the leaderboard to see the highest scores.
+This project was to make a timed quiz, on the fundamentals of JavaScript. The  This quiz is on JavaScript  This project consists of quiz will start a countdown timer when the start button is clicked. After being prompted to answer different questions, the score will be displayed on the screen. If an answer is incorrect, 15 seconds will be deducted from the score. The quiz will end when the timer hits when all the questions are answered, or the timer has reached 0. After the game is over you can save your score by registering it with your initials. You can then view the leaderboard to see the highest scores.
 
 ## Installation
 
@@ -15,8 +15,8 @@ To use this page, start the quiz by pressing the start button. Answer the questi
 
 ## Credits
 
-Lots of internet Resources
-Teachers/Class Material
+- Lots of internet Resources
+- Teachers/Class Material
 
 ## License 
 
