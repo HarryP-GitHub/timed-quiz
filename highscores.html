@@ -1,22 +1,21 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-<title>Highscores</title>
-<link rel="stylesheet" href="./assets/css/style.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>High Scores</title>
+    <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
-  <div class="score-page">
-  <h1>Highscores</h1>
-  
-  <ol id="scoreboard"></ol>
-  <a href="index.html"><button>Go Back</button></a>
-  <button id="clear-btn">Clear Highscores</button>
-  
-  <!--<script src="assets/js/script.js"></script>-->
-  <!-- Need a new JS for this page, I think it's looking to loop through the code, when I marked this out it stopped showing error-->
-  <!-- Probably a better way to do this I'm not sure, is it better to put it all into one script? Idk how without the error-->
-  <script src ="assets/js/scoreboard.js"></script>
-  </div>
+    <!-- sidebar used as nav bar-->
+    <aside class="sidebar">
+        <a href="index.html" class="nav-link">Home</a>
+    </aside>
+    <div class="content">
+        <h1>Top Scores</h1>
+        <ol id="highScoresList"></ol>
+        <button id="resetScores">Reset Scores</button>
+    </div>
+    <script src="assets/js/scoreboard.js"></script>
 </body>
+</html>

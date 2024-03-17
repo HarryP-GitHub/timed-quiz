@@ -1,166 +1,140 @@
-/*Section for Questions -> need to write questions and answers*/
-var questions = [
-    {
-      question: 'Which one of these examples create a new variable:',
-      answers: ['var variableName', 'new variableName', 'set variableName', 'create variableName'],
-      correctAnswer: 'var variableName',
-    },
-    {
-      question: 'Which function is written correctly:',
-      answers: ['runFunction startQuiz {}', 'function startQuiz() {}', 'function startQuiz {}', 'startQuiz function() {}'],
-      correctAnswer: 'function startQuiz() {}',
-    },
-    {
-      question: 'What does "console.log()" do in JavaScript',
-      answers: ['Displays as a notification', 'Loops through an array', 'Finds element by ID', 'Prints the output into the console'],
-      correctAnswer: 'Prints the output into the console',
-    },
-    {
-      question: 'How do you find an element by Id in JavaScript',
-      answers: ['searchElementId()', 'sourceElementById()', 'getElementById()', 'findElementById()'],
-      correctAnswer: 'getElementById()',
-    },
-    {
-      question: 'Which one of these will loop through an array in JavaScript',
-      answers: ['for () {}', 'run () {}', 'if () {}', 'else () {}'],
-      correctAnswer: 'for () {}',
-    },
-  ];
+// Setting up questions + answers
+const questions = [
+  {
+      question: 'How do you create a new variable in JavaScript?',
+      answers: [
+          { text: 'var newVariable;', correct: true },
+          { text: 'create.variable.newVariable;', correct: false },
+          { text: 'new = variable;', correct: false },
+          { text: 'newVariable.create;', correct: false }
+      ]
+  },
+  {
+      question: 'Inside which HTML element do you link the JavaScript?',
+      answers: [
+          { text: '<script>', correct: true },
+          { text: '<javascript>', correct: false },
+          { text: '<js>', correct: false },
+          { text: '<scripting>', correct: false }
+      ]
+  },
+  {
+      question: 'Which is correct way to log "Hello" in JavaScript?',
+      answers: [
+          { text: 'print("Hello World")', correct: false },
+          { text: 'say("Hello World")', correct: false },
+          { text: 'console.log("Hello World")', correct: true },
+          { text: 'log.text("Hello World")', correct: false }
+      ]
+  },
+  {
+      question: 'How do you create a function in JavaScript?',
+      answers: [
+          { text: 'function = aFunction()', correct: false },
+          { text: 'function aFunction()', correct: true },
+          { text: 'function: aFunction()', correct: false },
+          { text: 'create aFunction()', correct: false }
+      ]
+  },
+  {
+      question: 'How to write an IF statement in JavaScript?',
+      answers: [
+          { text: 'if i == 5 then', correct: false },
+          { text: 'if i = 5', correct: false },
+          { text: 'if (i == 5)', correct: true },
+          { text: 'if i = 5 then', correct: false }
+      ]
+  }
+];
 
-/*Section for Timer*/
-var time = 75;
-var theClock;
-var timeCount = document.getElementById('time');
+let currentQuestionIndex = 0;
+// Determining time is questions length x 15
+let timeLeft = questions.length * 15; 
+let timerInterval;
 
-function timer() {
-    time--;
-    timeCount.textContent = time;
-
-    if (time <= 0) {
-        endQuiz();
-    }
-}
-
-/* getElementById('time'), subtract time length by 15 on wrong question, end game at 0*/
-var questionIndex = 0
-var startEl = document.getElementById('start');
-var questionsEl = document.getElementById('questions');
-var questionEl = document.getElementById('new-question');
-var answersEl = document.getElementById('answers');
-var endEl = document.getElementById('quiz-end');
-var scoreEl = document.getElementById('score');
-var initialsEl = document.getElementById('initials');
-var submit = document.getElementById('submit-btn')
-
-console.log('Script loaded');
-
-/* Start button / Quiz Starts / Timer starts count down / Question shown*/
-document.getElementById('start-btn').addEventListener("click", startQuiz);
+// Function to start the quiz.
 function startQuiz() {
-  startEl.setAttribute('class', 'hidden');
-  questionsEl.removeAttribute('class', 'hidden');
+  // Hides the intro on the main page so questions can be shown
+  document.getElementById('intro').classList.add('hidden');
+  // Shows question when quiz starts
+  showQuestion();
+  // Reset time left each time quiz is started
+  timeLeft = questions.length * 15; 
+  document.getElementById('remainingTime').textContent = timeLeft;
 
-  theClock = setInterval(timer, 1000);
-
-  timeCount.textContent = time;
-
-    console.log('Quiz started!');
-  runQuestion();
+  // Setting up timer 
+  timerInterval = setInterval(function() {
+      timeLeft--;
+      document.getElementById('remainingTime').textContent = timeLeft;
+      //When time left is less than or equal to 0 it will stop timer and go to showCompletion function
+      if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          showCompletion();
+      }
+  }, 1000);
 }
 
-/* Answered question, next question shown, time either counts down and/or subtracts if wrong answer */
-// bring up new question
-function runQuestion() {
-var newQuestion = questions[questionIndex];
-questionEl.textContent = newQuestion.question;
-console.log('Question: ' + newQuestion.question);
+// Function for showing the questions
+function showQuestion() {
+  // Removes hidden so quiz can be displayed
+  document.getElementById('quiz').classList.remove('hidden');
+  let quizQuestion = questions[currentQuestionIndex];
+  let choicesEl = document.getElementById('choices');
+  document.getElementById('questionTitle').textContent = quizQuestion.question;
+  //Clear previous choices
+  choicesEl.innerHTML = ''; 
 
-answersEl.textContent = "";
+  quizQuestion.answers.forEach(function(choice, index) {
+      let button = document.createElement('button');
+      button.textContent = choice.text;
+      button.addEventListener('click', function() { selectAnswer(index); });
+      choicesEl.appendChild(button);
+  });
+}
 
-for (var i = 0; i < newQuestion.answers.length; i++) {
-    var answer = newQuestion.answers[i];
-    var answerBtn = document.createElement('button');
-    answerBtn.setAttribute('value', answer);
-    answerBtn.setAttribute('class', 'answerStyle');
-    answerBtn.textContent = answer;
 
-    answersEl.appendChild(answerBtn);
+// Function to process the selected answer.
+function selectAnswer(index) {
+  let quizQuestion = questions[currentQuestionIndex];
+  
+  // Deduct time for an incorrect answer, ensuring the score does not go negative.
+  if (!quizQuestion.answers[index].correct) {
+      // Math.max ensure's that if the time left is below 0, it will become zero.
+      timeLeft -= 15;
+      timeLeft = Math.max(0, timeLeft); 
+      document.getElementById('remainingTime').textContent = timeLeft;
+  }
+
+  // Will continue to next question
+  if (currentQuestionIndex < questions.length - 1) {
+      currentQuestionIndex++;
+      showQuestion();
+  } else {
+      // Stops quiz and stops timer
+      clearInterval(timerInterval); 
+      showCompletion();
   }
 }
 
-//run function for answer if right/wrong etc and impacts time
-answersEl.addEventListener("click", runAnswer);
-function runAnswer(event) {
-console.log('Your answer is...');
-var myAnswer = event.target;
-
-
-if (myAnswer.value !== questions[questionIndex].correctAnswer) {
-    time -= 15;
-
-    // for later, when timer = 0, final score wont be negative and game will end when it's at 0, especially if last question is wrong
-      if (time < 0) {
-          time = 0;
-    }
-
-    console.log('The Wrong Answer!');
-
-    // fixed time left to match score, if last answer was wrong it wouldn't match
-    timeCount.textContent = time;
+// Function to display the quiz completion screen.
+function showCompletion() {
+  clearInterval(timerInterval);
+  timeLeft = Math.max(0, timeLeft);
+  document.getElementById('quiz').classList.add('hidden');
+  document.getElementById('quizCompletion').classList.remove('hidden');
+  document.getElementById('finalScore').textContent = timeLeft;
 }
 
-// will need to add in timer
-if (!myAnswer.matches('.answerStyle')) {
-    console.log('No Answer?!');
- return;
-
-} else if (myAnswer.value === questions[questionIndex].correctAnswer) {
-  console.log('CORREEECCTT!!!');
-}
-
-questionIndex++;
-
-if (time <= 0 || questionIndex === questions.length) {
-    endQuiz();
-} else {
-    runQuestion();
-}
-// console.log('testtest');
-} 
-
-/*End Quiz if time runs out/answers all questions -> prompt screen*/
-
-function endQuiz() {
-  clearInterval(theClock);
-
-  questionsEl.setAttribute('class', 'hidden');
-
-  endEl.removeAttribute('class', 'hidden');
-  scoreEl.textContent = time;
-
-  console.log('Your score is ' + time);
-}
-/* Save your high score and go to page or go back to main page, already have buttons*/
-submit.addEventListener("click", saveNewScore);
-
-function saveNewScore() {
-var name = initialsEl.value.toUpperCase().trim();
-
-if (name !== "") {
-    var scoreboard = JSON.parse(window.localStorage.getItem('scores')) || [];
-
-    var newScore = {
-        score: time,
-        name: name,
-    };
-
-    scoreboard.push(newScore);
-    localStorage.setItem('scores', JSON.stringify(scoreboard));
-    location.href = 'highscores.html';
-}
-}
-
-
-/*Section for Highscores page, store highscores and clear scores*/
-// doing it on a different script page, was getting error
-//Is there a way to fix?
+// Event listener for start
+document.getElementById('beginQuiz').addEventListener('click', startQuiz);
+// Event listener for submitting score
+document.getElementById('scoreSubmit').addEventListener('click', function() {
+  let initials = document.getElementById('userInitials').value.toUpperCase();
+  if (initials) {
+      let highscores = JSON.parse(localStorage.getItem('highscores') || '[]');
+      let newScore = { score: timeLeft, initials };
+      highscores.push(newScore);
+      localStorage.setItem('highscores', JSON.stringify(highscores));
+      window.location.href = 'highscores.html';
+  }
+});
